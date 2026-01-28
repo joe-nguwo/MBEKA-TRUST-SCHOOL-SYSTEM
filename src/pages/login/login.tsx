@@ -1,4 +1,5 @@
-import { useState } from "react";
+import {useMutation} from "@tanstack/react-query"
+import React,{ useState} from "react";
 import {Lock,CircleUser} from "lucide-react"
 import {
   Card,
@@ -9,12 +10,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import api from "../../services/endpoint.ts"
+
+
 
 function Loginpage() {
   const [values, setValue] = useState({
     id: "",
     name: "",
   });
+
+
+
 
   function handledata(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -24,10 +31,18 @@ function Loginpage() {
     }));
   }
 
+  const post = useMutation({
+    mutationFn: (data: { id: string; name: string }) => api.post("login", {data}),
+  })
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     console.log(values);
+    post.mutate(values)
   }
+
+
+ 
 
   return (
     <main className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -35,7 +50,8 @@ function Loginpage() {
         <CardHeader>
           <CardTitle className="text-center">LOGIN</CardTitle>
           <CardDescription className="text-center">
-            ENTER NAME AND PASSWORD TO LOGIN
+           
+            
           </CardDescription>
         </CardHeader>
 

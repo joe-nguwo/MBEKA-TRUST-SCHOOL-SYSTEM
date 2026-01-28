@@ -1,11 +1,18 @@
-
+import {Routes,Route} from "react-router-dom"
 import './App.css';
-import Loginpage from './lib/pages/login/login';
+import Loginpage from '@/pages/login/login.tsx';
 
 function App() {
+
+
   return (
+    
     <>
-    <Loginpage/>
+    <Routes>
+      <Route path="/" element={ <Loginpage/>}></Route>
+    </Routes>
+      <Loginpage /> 
+  
       
     </>
   );
