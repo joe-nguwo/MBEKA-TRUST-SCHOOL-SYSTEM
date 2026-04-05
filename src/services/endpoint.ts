@@ -31,7 +31,8 @@ const fetcher = async <T>(
       temp.body = options.data;
     }
   }
-  const baseUrl = import.meta.env.VITE_API_BACKEND || 3000;
+ 
+  const baseUrl = import.meta.env.VITE_API_BACKEND || "http://localhost:3000";
   let _endpoint = ROUTES[endpoint];
 
   if (options?.queries) {

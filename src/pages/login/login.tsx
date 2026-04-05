@@ -16,12 +16,11 @@ import api from "../../services/endpoint.ts"
 
 function Loginpage() {
   const [values, setValue] = useState({
-    id: "",
     name: "",
+    email: "",
+  
+
   });
-
-
-
 
   function handledata(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -32,7 +31,11 @@ function Loginpage() {
   }
 
   const post = useMutation({
-    mutationFn: (data: { id: string; name: string }) => api.post("login", {data}),
+    mutationFn: (data: { name: string; email: string; }) => api.post("login", {data}),
+    onSuccess: () => {
+     alert("Login successful");
+    }
+    
   })
 
   function handleSubmit(e: React.FormEvent) {
@@ -57,6 +60,7 @@ function Loginpage() {
 
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
+         
             <div className="flex flex-col">
               <label htmlFor="username" className="mb-1 text-sm font-medium">
                  <CircleUser></CircleUser>
@@ -79,10 +83,10 @@ function Loginpage() {
               </label>
               <input
                 type="password"
-                value={values.id}
+                value={values.email}
                 onChange={handledata}
                 id="password"
-                name="id"
+                name="email"
                 className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
