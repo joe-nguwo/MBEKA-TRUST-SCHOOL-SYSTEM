@@ -1,6 +1,7 @@
-import {useMutation} from "@tanstack/react-query"
-import React,{ useState} from "react";
-import {Lock,CircleUser} from "lucide-react"
+import { useMutation } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Lock, CircleUser } from "lucide-react";
 import {
   Card,
   CardAction,
@@ -10,16 +11,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import api from "../../services/endpoint.ts"
-
-
+import api from "../../services/endpoint.ts";
 
 function Loginpage() {
+  const navigate = useNavigate();
   const [values, setValue] = useState({
     name: "",
     email: "",
-  
-
   });
 
   function handledata(e: React.ChangeEvent<HTMLInputElement>) {
@@ -31,39 +29,36 @@ function Loginpage() {
   }
 
   const post = useMutation({
-    mutationFn: (data: { name: string; email: string; }) => api.post("login", {data}),
-    onSuccess: () => {
-     alert("Login successful");
-    }
-    
-  })
+    mutationFn: (data: { name: string; email: string }) =>
+      api.post("login", { data }),
+    onSuccess: (data) => {
+      console.log(data);
+      navigate("/auth/dashboard");
+    },
+    onError: (error) => {
+      console.error("Login failed:", error);
+    },
+  });
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     console.log(values);
-    post.mutate(values)
+    post.mutate(values);
   }
-
-
- 
 
   return (
     <main className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md p-4 shadow-md">
         <CardHeader>
           <CardTitle className="text-center">LOGIN</CardTitle>
-          <CardDescription className="text-center">
-           
-            
-          </CardDescription>
+          <CardDescription className="text-center"></CardDescription>
         </CardHeader>
 
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-         
             <div className="flex flex-col">
               <label htmlFor="username" className="mb-1 text-sm font-medium">
-                 <CircleUser></CircleUser>
+                <CircleUser></CircleUser>
                 Username:
               </label>
               <input
@@ -82,7 +77,7 @@ function Loginpage() {
                 Password:
               </label>
               <input
-                type="password"
+                type="email"
                 value={values.email}
                 onChange={handledata}
                 id="password"
@@ -94,22 +89,22 @@ function Loginpage() {
             <CardFooter className="p-0">
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                disabled={post.isPending}
+                className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition-colors disabled:opacity-50"
               >
-                Login
+                {post.isPending ? "Login in ..." : "Login"}
               </button>
             </CardFooter>
           </form>
         </CardContent>
 
-       
         <CardAction className="flex justify-between items-center mt-4 px-4 text-sm text-blue-600">
-          <a href="/forgot-password" className="hover:underline">
+          <Link to="/forgot-password" className="hover:underline">
             Forgot Password?
-          </a>
-          <a href="/register" className="hover:underline font-medium">
+          </Link>
+          <Link to="/register" className="hover:underline font-medium">
             Sign Up
-          </a>
+          </Link>
         </CardAction>
       </Card>
     </main>

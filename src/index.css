@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -10,7 +11,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #111010;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -126,9 +127,6 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-body{
-  background-color: black;
-}
 
 @layer base {
   * {

@@ -55,7 +55,7 @@ const fetcher = async <T>(
 
   const server_response: Response<T> = await res.json();
   if (res.ok) {
-    if (server_response.status == 0) {
+    if (server_response.status == 1) {
       return server_response?.data as T;
     } else {
       throw new Error(server_response?.message || "Unknown error occurred");
