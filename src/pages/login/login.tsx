@@ -1,7 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import { Lock, CircleUser } from "lucide-react";
+import React, { useState} from "react";
+
+import { Mail, CircleUser } from "lucide-react";
 import {
   Card,
   CardAction,
@@ -15,6 +16,7 @@ import api from "../../services/endpoint.ts";
 
 function Loginpage() {
   const navigate = useNavigate();
+
   const [values, setValue] = useState({
     name: "",
     email: "",
@@ -47,7 +49,7 @@ function Loginpage() {
   }
 
   return (
-    <main className="flex items-center justify-center min-h-screen bg-gray-100">
+<main className="flex items-center justify-center min-h-screen bg-gray-800">
       <Card className="w-full max-w-md p-4 shadow-md">
         <CardHeader>
           <CardTitle className="text-center">LOGIN</CardTitle>
@@ -73,7 +75,7 @@ function Loginpage() {
 
             <div className="flex flex-col">
               <label htmlFor="password" className="mb-1 text-sm font-medium">
-                <Lock></Lock>
+               <Mail></Mail>
                 Password:
               </label>
               <input

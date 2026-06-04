@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import { Lock, CircleUser } from "lucide-react";
+import { Lock, CircleUser, Mail} from "lucide-react";
 import {
   Card,
   CardAction,
@@ -48,7 +48,7 @@ function Register() {
   }
 
   return (
-    <main className="flex items-center justify-center min-h-screen bg-gray-100">
+   <main className="flex items-center justify-center min-h-screen bg-gray-800">
       <Card className="w-full max-w-md p-4 shadow-md">
         <CardHeader>
           <CardTitle className="text-center">REGISTER</CardTitle>
@@ -70,12 +70,13 @@ function Register() {
                 id="username"
                 name="name"
                 className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
               />
             </div>
 
             <div className="flex flex-col">
               <label htmlFor="email" className="mb-1 text-sm font-medium">
-                Email:
+                < Mail /> Email:
               </label>
               <input
                 type="email"
@@ -84,6 +85,7 @@ function Register() {
                 id="email"
                 name="email"
                 className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
               />
             </div>
 
@@ -98,6 +100,7 @@ function Register() {
                 id="password"
                 name="password"
                 className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
               />
             </div>
 

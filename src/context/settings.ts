@@ -8,7 +8,7 @@ export interface ThemeInterface {
     setTheme: ( )=> void
 }
 
-export const context = createContext<undefined | ThemeInterface>
+export const ColurContext = createContext<undefined | ThemeInterface>(undefined)
 
 
 
