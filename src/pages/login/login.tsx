@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState} from "react";
+import React, { useState,useContext } from "react";
+import  { ColurContext } from "@/context/settings.ts";
+import {auth} from "@/context/auth.tsx";
 
 import { Mail, CircleUser } from "lucide-react";
 import {
@@ -14,8 +16,12 @@ import {
 } from "@/components/ui/card";
 import api from "../../services/endpoint.ts";
 
+
 function Loginpage() {
   const navigate = useNavigate();
+  const x = useContext(ColurContext)
+  console.log(x)
+
 
   const [values, setValue] = useState({
     name: "",
@@ -34,6 +40,7 @@ function Loginpage() {
     mutationFn: (data: { name: string; email: string }) =>
       api.post("login", { data }),
     onSuccess: (data) => {
+      auth.setBool = true
       console.log(data);
       navigate("/auth/dashboard");
     },
@@ -49,8 +56,9 @@ function Loginpage() {
   }
 
   return (
-<main className="flex items-center justify-center min-h-screen bg-gray-800">
+   <main className={`flex items-center justify-center min-h-screen bg${x?.theme}`}>
       <Card className="w-full max-w-md p-4 shadow-md">
+           <button onClick={()=> x?.setTheme()}>ChangeTheme</button>
         <CardHeader>
           <CardTitle className="text-center">LOGIN</CardTitle>
           <CardDescription className="text-center"></CardDescription>
@@ -70,12 +78,13 @@ function Loginpage() {
                 id="username"
                 name="name"
                 className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
               />
             </div>
 
             <div className="flex flex-col">
               <label htmlFor="password" className="mb-1 text-sm font-medium">
-               <Mail></Mail>
+                <Mail></Mail>
                 Password:
               </label>
               <input
@@ -85,6 +94,7 @@ function Loginpage() {
                 id="password"
                 name="email"
                 className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
               />
             </div>
 
