@@ -1,6 +1,6 @@
 class Auth {
-  private _value: boolean;
-  public constructor(value: boolean = false) {
+  private _value: boolean ;
+  public constructor(value: boolean = true) {
     this._value = value;
   }
 

@@ -32,7 +32,7 @@ const fetcher = async <T>(
     }
   }
  
-  const baseUrl = import.meta.env.VITE_API_BACKEND || "http://localhost:3000";
+  const baseUrl = import.meta.env.VITE_API_BACKEND || "http://localhost:8000";
   let _endpoint = ROUTES[endpoint];
 
   if (options?.queries) {

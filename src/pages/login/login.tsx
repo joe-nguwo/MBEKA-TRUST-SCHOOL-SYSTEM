@@ -40,7 +40,7 @@ function Loginpage() {
     mutationFn: (data: { name: string; email: string }) =>
       api.post("login", { data }),
     onSuccess: (data) => {
-      auth.setBool = true
+      auth.setBool = false
       console.log(data);
       navigate("/auth/dashboard");
     },

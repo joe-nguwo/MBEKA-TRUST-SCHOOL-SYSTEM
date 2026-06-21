@@ -1,15 +1,22 @@
-import { Sidebar } from  "@/components/ui/sidebar";
+import { type ReactNode } from "react";
+import { SidebarProvider,SidebarTrigger } from  "@/components/ui/sidebar";
+import AppSideBar from "@/components/sideBarComponent";
 
 
-function Sidebar1(){
+function Sidebar({children}:{children:ReactNode}){
 
-    return <>
-    <Sidebar>
-        
+    return (
+        <SidebarProvider>
+            <AppSideBar/>
+                <main className="w-full min-h-screen p-4">
+                    <SidebarTrigger/>
+                    {children}
+                </main>
+         
+        </SidebarProvider>
 
-    </Sidebar>
-    
-    </>
+    )
+   
 }
 
-export default  Sidebar1
+export default  Sidebar

@@ -22,3 +22,16 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+<Routes>
+  <Route path="/" element={<Loginpage />} />
+  <Route path="/register" element={<Registerpage />} />
+
+  <Route
+    path="/auth/dashboard/*"
+    element={
+      <Sidebar>
+        <Index />
+      </Sidebar>
+    }
+  />
+</Routes>
