@@ -10,7 +10,10 @@ function Sidebar({children}:{children:ReactNode}){
             <AppSideBar/>
                 <main className="w-full min-h-screen p-4">
                     <SidebarTrigger/>
-                    {children}
+                    <div className="flex justify-center items-center py-20">
+                          {children}
+                    </div>
+                  
                 </main>
          
         </SidebarProvider>

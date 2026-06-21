@@ -9,11 +9,12 @@ import {
 function AppSideBar(){
     return(
         <Sidebar>
-            <SidebarHeader></SidebarHeader>
+            <SidebarHeader>Mbeka trust School</SidebarHeader>
             <SidebarContent>
                 <SidebarGroup></SidebarGroup>
             </SidebarContent>
             <SidebarFooter></SidebarFooter>
+            Log out
         </Sidebar>
 
     )
