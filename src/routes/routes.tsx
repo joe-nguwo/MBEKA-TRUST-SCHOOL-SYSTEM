@@ -1,22 +1,25 @@
 import { Routes, Route } from "react-router-dom";
-import Loginpage from "@/pages/login/login.tsx";
-import Registerpage from "@/pages/login/register.tsx";
-import Index from "@/pages/dashboard/index.tsx";
-import Sidebar from "@/layout/sidebar.tsx";
 
-function Routess(){
+import Loginpage from "@/pages/login/login";
+import Registerpage from "@/pages/login/register";
+import Dashboard from "@/pages/dashboard";
+import Students from "@/pages/students";
 
-    return(
-         <Routes>
-        <Route path="/" element={<Loginpage />} />
-        <Route path="/register" element={<Registerpage />} />
-        <Route path="/auth/dashboard" element={<Sidebar>
-          <Index></Index>
-        </Sidebar>}
-        />
-      
-      </Routes>
-    )
+import SidebarLayout from "@/layout/sidebar";
+
+function Routess() {
+  return (
+    <Routes>
+     
+      <Route path="/" element={<Loginpage />} />
+      <Route path="/register" element={<Registerpage />} />
+
+      <Route path="/auth" element={<SidebarLayout />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="students" element={<Students />} />
+      </Route>
+    </Routes>
+  );
 }
 
-export default Routess
+export default Routess;

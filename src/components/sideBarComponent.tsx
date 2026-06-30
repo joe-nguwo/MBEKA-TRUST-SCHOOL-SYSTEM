@@ -1,5 +1,6 @@
 import { Home, Settings, Users, HelpCircle } from "lucide-react";
 import { NavLink } from "react-router-dom";
+
 import {
   Sidebar,
   SidebarContent,
@@ -20,26 +21,50 @@ interface NavItem {
 }
 
 const items: NavItem[] = [
-  { title: "Dashbaord", url: "/auth/dashboard", icon: Home },
-  { title: "Students", url: "auth/students", icon: Users },
-  { title: "Books", url: "/auth/books", icon: Settings },
-  { title: "Help", url: "/help", icon: HelpCircle },
+  {
+    title: "Dashboard",
+    url: "/auth/dashboard",
+    icon: Home,
+  },
+  {
+    title: "Students",
+    url: "/auth/students",
+    icon: Users,
+  },
+  {
+    title: "Books",
+    url: "/auth/books",
+    icon: Settings,
+  },
+  {
+    title: "Help",
+    url: "/help",
+    icon: HelpCircle,
+  },
 ];
 
-export function AppSidebar() {
+export default function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader>Mbeka School</SidebarHeader>
+      <SidebarHeader className="text-lg font-bold p-4">
+        Mbeka School
+      </SidebarHeader>
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>NavLinks</SidebarGroupLabel>
+          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.url}>
+                    <NavLink
+                      to={item.url}
+                      className={({ isActive }) =>
+                        isActive ? "font-bold text-blue-600" : ""
+                      }
+                    >
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
                     </NavLink>
@@ -51,9 +76,9 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter>Footer</SidebarFooter>
+      <SidebarFooter className="p-4">
+        © {new Date().getFullYear()} Mbeka School
+      </SidebarFooter>
     </Sidebar>
   );
 }
-
-export default AppSidebar;

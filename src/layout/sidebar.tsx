@@ -1,25 +1,23 @@
-import { type ReactNode } from "react";
-import { SidebarProvider,SidebarTrigger } from  "@/components/ui/sidebar";
+import { Outlet } from "react-router-dom";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import AppSideBar from "@/components/sideBarComponent";
 
+function SidebarLayout() {
+  return (
+    <SidebarProvider>
+      <div className="flex min-h-screen w-full">
+        <AppSideBar />
 
-function Sidebar({children}:{children:ReactNode}){
+        <main className="flex-1 p-4">
+          <SidebarTrigger />
 
-    return (
-        <SidebarProvider>
-            <AppSideBar/>
-                <main className="w-full min-h-screen p-4">
-                    <SidebarTrigger/>
-                    <div className="flex justify-center items-center py-20">
-                          {children}
-                    </div>
-                  
-                </main>
-         
-        </SidebarProvider>
-
-    )
-   
+          <div className="py-6">
+            <Outlet />
+          </div>
+        </main>
+      </div>
+    </SidebarProvider>
+  );
 }
 
-export default  Sidebar
+export default SidebarLayout;
