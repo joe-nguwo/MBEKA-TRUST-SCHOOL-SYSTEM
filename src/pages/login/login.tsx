@@ -4,7 +4,7 @@ import React, { useState,useContext } from "react";
 import  { ColurContext } from "@/context/settings.ts";
 import {auth} from "@/context/auth.tsx";
 
-import { Mail, CircleUser } from "lucide-react";
+import {  Lock, CircleUser } from "lucide-react";
 import {
   Card,
   CardAction,
@@ -25,7 +25,7 @@ function Loginpage() {
 
   const [values, setValue] = useState({
     name: "",
-    email: "",
+    password: "",
   });
 
   function handledata(e: React.ChangeEvent<HTMLInputElement>) {
@@ -37,7 +37,7 @@ function Loginpage() {
   }
 
   const post = useMutation({
-    mutationFn: (data: { name: string; email: string }) =>
+    mutationFn: (data: { name: string; password: string }) =>
       api.post("login", { data }),
     onSuccess: (data) => {
       auth.setBool = false
@@ -84,15 +84,15 @@ function Loginpage() {
 
             <div className="flex flex-col">
               <label htmlFor="password" className="mb-1 text-sm font-medium">
-                <Mail></Mail>
+                < Lock></ Lock>
                 Password:
               </label>
               <input
-                type="email"
-                value={values.email}
+                type="password"
+                value={values.password}
                 onChange={handledata}
                 id="password"
-                name="email"
+                name="password"
                 className="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
