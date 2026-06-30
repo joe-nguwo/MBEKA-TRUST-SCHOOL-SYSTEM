@@ -1,23 +1,59 @@
+import { Home, Settings, Users, HelpCircle } from "lucide-react";
+import { NavLink } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
   SidebarHeader,
-} from "./ui/sidebar";
+  SidebarFooter,
+} from "@/components/ui/sidebar";
 
-function AppSideBar(){
-    return(
-        <Sidebar>
-            <SidebarHeader>Mbeka trust School</SidebarHeader>
-            <SidebarContent>
-                <SidebarGroup></SidebarGroup>
-            </SidebarContent>
-            <SidebarFooter></SidebarFooter>
-            Log out
-        </Sidebar>
-
-    )
+interface NavItem {
+  title: string;
+  url: string;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
-export default AppSideBar
+const items: NavItem[] = [
+  { title: "Dashbaord", url: "/auth/dashboard", icon: Home },
+  { title: "Students", url: "auth/students", icon: Users },
+  { title: "Books", url: "/auth/books", icon: Settings },
+  { title: "Help", url: "/help", icon: HelpCircle },
+];
+
+export function AppSidebar() {
+  return (
+    <Sidebar>
+      <SidebarHeader>Mbeka School</SidebarHeader>
+
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>NavLinks</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <NavLink to={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      <span>{item.title}</span>
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+
+      <SidebarFooter>Footer</SidebarFooter>
+    </Sidebar>
+  );
+}
+
+export default AppSidebar;
