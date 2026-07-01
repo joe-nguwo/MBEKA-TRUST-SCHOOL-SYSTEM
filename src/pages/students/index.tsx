@@ -1,9 +1,10 @@
-
+import AddStudent from "./addStudent"
 
 function IndexStudent(){
     return(
         <>
-        this is stdents space
+        <AddStudent></AddStudent>
+   
         </>
 
     )
