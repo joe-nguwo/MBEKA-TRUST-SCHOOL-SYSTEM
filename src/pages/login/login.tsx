@@ -14,7 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import api from "../../services/endpoint.ts";
+import api from "@/services/endpoint.ts";
 
 
 function Loginpage() {
