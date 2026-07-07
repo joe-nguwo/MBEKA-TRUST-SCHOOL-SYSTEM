@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import {
   Table,
   TableHeader,
@@ -8,12 +9,20 @@ import {
   TableCell,
   TableCaption,
 } from "@/components/ui/table";
+import { type students } from "@/types/auth";
 import api from "@/services/endpoint.ts";
 
 function ShowStudents() {
+  const fetch = useQuery({
+    queryKey: ["students"],
+    queryFn: () => api.get("allStudents"),
+  });
+
+  //let x: students[] = fetch.data;
+
   return (
     <Table>
-      <TableCaption>List of students</TableCaption>
+      {/* <TableCaption>List of students</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>name</TableHead>
@@ -22,12 +31,14 @@ function ShowStudents() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        <TableRow>
-          <TableCell>1</TableCell>
-          <TableCell>2</TableCell>
-          <TableCell>3</TableCell>
-        </TableRow>
-      </TableBody>
+        {x.map((x) => (
+          <TableRow key={x.id}>
+            <TableCell>{x.name}</TableCell>
+            <TableCell>{x.age}</TableCell>
+            <TableCell>{x.email}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody> */}
     </Table>
   );
 }

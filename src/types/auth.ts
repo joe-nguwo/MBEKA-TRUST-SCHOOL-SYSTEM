@@ -3,3 +3,13 @@ export type response ={
     message:string,
     token:string
 }
+
+export type students = {
+    id:number,
+    name:string,
+    email:string,
+    age:string
+    createdA:string,
+    updatedAt:string
+
+}
