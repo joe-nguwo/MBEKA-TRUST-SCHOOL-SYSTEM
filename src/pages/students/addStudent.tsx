@@ -6,22 +6,15 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { CircleUser, Cake, Mail } from "lucide-react";
 import api from "../../services/endpoint.ts";
 
 function AddStudent() {
   const [values, setValues] = useState({
-    name: "",
+    Fname: "",
+    Lname: "",
     email: "",
-    age: "",
+    grade: "",
+    gender: "",
   });
 
   const handledata = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,13 +25,20 @@ function AddStudent() {
   };
 
   const post = useMutation({
-    mutationFn: (data: { name: string; email: string; age: string }) =>
-      api.post("addStudent", { data }),
+    mutationFn: (data: {
+      Fname: string;
+      Lname: string;
+      email: string;
+      grade: string;
+      gender: string;
+    }) => api.post("addStudent", { data }),
+
     onSuccess: () => {
       console.log("good");
     },
-    onError: (error:Error) => {
-      console.log("bad",error.message);
+
+    onError: (error: Error) => {
+      console.log("bad", error.message);
     },
   });
 
@@ -48,99 +48,107 @@ function AddStudent() {
     post.mutate(values);
   };
 
+  const inputStyle =
+    "w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-green-500";
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700 transition-colors">
+        <button className="rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-700">
           Add Student
         </button>
       </DialogTrigger>
 
-      <DialogContent>
-        <DialogHeader>Students</DialogHeader>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <h2 className="text-center text-xl font-bold">
+            Register Student
+          </h2>
+          <p className="text-center text-sm text-gray-500">
+            Fill in the student's details.
+          </p>
+        </DialogHeader>
 
-        <Card className="w-full max-w-md shadow-md">
-          <CardHeader>
-            <CardTitle className="text-center">REGISTER</CardTitle>
-            <CardDescription className="text-center">
-              Add a student
-            </CardDescription>
-          </CardHeader>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            className={inputStyle}
+            type="text"
+            name="Fname"
+            placeholder="First Name"
+            value={values.Fname}
+            onChange={handledata}
+            required
+          />
 
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="flex flex-col">
-                <label
-                  htmlFor="username"
-                  className="mb-1 flex items-center gap-2 text-sm font-medium"
-                >
-                  <CircleUser size={18} />
-                  Username
-                </label>
+          <input
+            className={inputStyle}
+            type="text"
+            name="Lname"
+            placeholder="Last Name"
+            value={values.Lname}
+            onChange={handledata}
+            required
+          />
 
+          <input
+            className={inputStyle}
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={values.email}
+            onChange={handledata}
+            required
+          />
+
+          <div>
+            <p className="mb-2 text-sm font-medium">Gender</p>
+
+            <div className="flex gap-6">
+              <label className="flex items-center gap-2">
                 <input
-                  id="username"
-                  type="text"
-                  name="name"
-                  value={values.name}
+                  type="radio"
+                  name="gender"
+                  value="Female"
+                  checked={values.gender === "Female"}
                   onChange={handledata}
                   required
-                  className="rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </div>
+                Female
+              </label>
 
-              <div className="flex flex-col">
-                <label
-                  htmlFor="email"
-                  className="mb-1 flex items-center gap-2 text-sm font-medium"
-                >
-                  <Mail size={18} />
-                  Email
-                </label>
-
+              <label className="flex items-center gap-2">
                 <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  value={values.email}
+                  type="radio"
+                  name="gender"
+                  value="Male"
+                  checked={values.gender === "Male"}
                   onChange={handledata}
-                  required
-                  className="rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </div>
+                Male
+              </label>
+            </div>
+          </div>
 
-              <div className="flex flex-col">
-                <label
-                  htmlFor="age"
-                  className="mb-1 flex items-center gap-2 text-sm font-medium"
-                >
-                  <Cake size={18} />
-                  Age
-                </label>
+          <input
+            className={inputStyle}
+            type="number"
+            name="grade"
+            placeholder="Grade (1 - 12)"
+            value={values.grade}
+            onChange={handledata}
+            min={1}
+            max={12}
+            required
+          />
 
-                <input
-                  id="age"
-                  type="text"
-                  name="age"
-                  value={values.age}
-                  onChange={handledata}
-                  required
-                  className="rounded border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-
-              <CardFooter className="p-0">
-                <button
-                  type="submit"
-                  disabled={post.isPending}
-                  className="w-full rounded bg-green-600 py-2 text-white transition-colors hover:bg-green-700 disabled:opacity-50"
-                >
-                  {post.isPending ? "Registering..." : "Register"}
-                </button>
-              </CardFooter>
-            </form>
-          </CardContent>
-        </Card>
+          <button
+            type="submit"
+            disabled={post.isPending}
+            className="w-full rounded-md bg-green-600 py-2 font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
+          >
+            {post.isPending ? "Registering..." : "Register"}
+          </button>
+        </form>
       </DialogContent>
     </Dialog>
   );
