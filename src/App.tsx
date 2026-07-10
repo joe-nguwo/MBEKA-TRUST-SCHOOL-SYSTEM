@@ -6,16 +6,15 @@ import Routess from "./routes/routes.tsx";
 
 
 function App() {
-  const [value,setValue] = useState<ThemeColurs>("red")
+  const [value,setValue] = useState<ThemeColurs>("--foreground")
   function  setTheme(){
-    setValue((value)=> (value == "red"?"black":"red"))
+    setValue((value)=> (value == "--foreground"?"--background":"--foreground"))
 
   }
  
     return (
         <ColurContext.Provider value={{ theme: value, setTheme: () => {setTheme()} }}>
           <Routess></Routess>
-     
     </ColurContext.Provider>
 
     )

@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 
-export  type ThemeColurs  = "red" | "black"
+export  type ThemeColurs  = "--foreground" | "--background"
 
 export interface ThemeInterface {
     theme: ThemeColurs;

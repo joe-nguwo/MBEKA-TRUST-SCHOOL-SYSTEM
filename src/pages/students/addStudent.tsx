@@ -108,8 +108,8 @@ function AddStudent() {
                 <input
                   type="radio"
                   name="gender"
-                  value="Female"
-                  checked={values.gender === "Female"}
+                  value="female"
+                  checked={values.gender === "female"}
                   onChange={handledata}
                   required
                 />
@@ -120,8 +120,8 @@ function AddStudent() {
                 <input
                   type="radio"
                   name="gender"
-                  value="Male"
-                  checked={values.gender === "Male"}
+                  value="fale"
+                  checked={values.gender === "male"}
                   onChange={handledata}
                 />
                 Male

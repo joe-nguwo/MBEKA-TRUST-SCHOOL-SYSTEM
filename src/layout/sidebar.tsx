@@ -6,7 +6,7 @@ function SidebarLayout() {
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
-        <AppSideBar />
+        < AppSideBar />
 
         <main className="flex-1 p-4">
           <SidebarTrigger />

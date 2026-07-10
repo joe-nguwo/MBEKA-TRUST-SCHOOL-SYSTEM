@@ -20,7 +20,7 @@ import api from "@/services/endpoint.ts";
 function Loginpage() {
   const navigate = useNavigate();
   const x = useContext(ColurContext)
-  console.log(x)
+  
 
 
   const [values, setValue] = useState({
@@ -56,9 +56,9 @@ function Loginpage() {
   }
 
   return (
-   <main className={`flex items-center justify-center min-h-screen bg${x?.theme}`}>
-      <Card className="w-full max-w-md p-4 shadow-md">
-           <button onClick={()=> x?.setTheme()}>ChangeTheme</button>
+   <main className="flex items-center justify-center min-h-screen" style={{background:`var(${x?.theme})`}} >
+      <Card className="w-full max-w-md p-4 shadow-md"  >
+           <button onClick={x?.setTheme}>ChangeTheme</button>
         <CardHeader>
           <CardTitle className="text-center">LOGIN</CardTitle>
           <CardDescription className="text-center"></CardDescription>

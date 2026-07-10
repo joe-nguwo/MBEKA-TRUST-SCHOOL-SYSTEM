@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+import  { ColurContext } from "@/context/settings.ts";
 import { Lock, CircleUser, Mail} from "lucide-react";
 import {
   Card,
@@ -15,6 +16,7 @@ import api from "../../services/endpoint.ts";
 import {auth} from "@/context/auth.tsx";
 
 function Register() {
+  const x = useContext(ColurContext)
   const navigate = useNavigate();
   const [values, setValues] = useState({
     name: "",
@@ -50,8 +52,9 @@ function Register() {
   }
 
   return (
-   <main className="flex items-center justify-center min-h-screen bg-gray-800">
+   <main className="flex items-center justify-center min-h-screen" style={{background:`var(${x?.theme})`}}>
       <Card className="w-full max-w-md p-4 shadow-md">
+         <button onClick={x?.setTheme}>ChangeTheme</button>
         <CardHeader>
           <CardTitle className="text-center">REGISTER</CardTitle>
           <CardDescription className="text-center">
