@@ -65,6 +65,11 @@ function Loginpage() {
         </CardHeader>
 
         <CardContent>
+          {post.isError && (
+            <p className="text-red-600 mb-4">
+              Login failed. Please try again. {post.error instanceof Error ? post.error.message : String(post.error)}
+            </p>
+          )}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="flex flex-col">
               <label htmlFor="username" className="mb-1 text-sm font-medium">

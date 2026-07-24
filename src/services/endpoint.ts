@@ -1,68 +1,89 @@
 import { ROUTES, type APIRoute } from "./routes.ts";
 
 type FetchRecord = {
-  headers?: Record<string, unknown>;
+  headers?: Record<string, string>;
   queries?: Record<string, unknown>;
   params?: Record<string, unknown>;
   data?: Record<string, unknown> | FormData;
 };
+
 type Response<T> = {
   status: number;
   message: string;
   data?: T;
 };
+
 const fetcher = async <T>(
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH",
   endpoint: APIRoute,
   options: FetchRecord = {},
-  isForm: boolean = false
+  isForm = false
 ): Promise<T> => {
-  const temp: Record<string, unknown> = {
+  const temp: RequestInit = {
     method,
+    credentials: "include", 
   };
-  if (options?.data) {
+
+  if (options.data) {
     if (!isForm) {
       temp.headers = {
         ...options.headers,
         "Content-Type": "application/json",
       };
+
       temp.body = JSON.stringify(options.data);
     } else {
-      temp.body = options.data;
+      temp.headers = {
+        ...options.headers,
+      };
+
+      temp.body = options.data as FormData;
     }
+  } else if (options.headers) {
+    temp.headers = {
+      ...options.headers,
+    };
   }
- 
-  const baseUrl = import.meta.env.VITE_API_BACKEND || "http://localhost:8000";
+
+  const baseUrl =
+    import.meta.env.VITE_API_BACKEND || "http://localhost:8000";
+
   let _endpoint = ROUTES[endpoint];
 
-  if (options?.queries) {
-    const queryString = new URLSearchParams(
-      Object.entries(options.queries).map(([k, v]) => [k, String(v)])
-    ).toString();
-    _endpoint += `?${queryString}`;
-  }
-  if (!endpoint) {
+  if (!_endpoint) {
     throw new Error(`Endpoint ${endpoint} not found in ROUTES`);
   }
-  if (options?.params) {
+
+  if (options.queries) {
+    const queryString = new URLSearchParams(
+      Object.entries(options.queries).map(([key, value]) => [
+        key,
+        String(value),
+      ])
+    ).toString();
+
+    _endpoint += `?${queryString}`;
+  }
+
+  if (options.params) {
     Object.entries(options.params).forEach(([key, value]) => {
       _endpoint = _endpoint.replace(`:${key}`, String(value));
     });
   }
-  const res = await fetch(`${baseUrl}${_endpoint}`, {
-    ...temp,
-  });
 
-  const server_response: Response<T> = await res.json();
+  const res = await fetch(`${baseUrl}${_endpoint}`, temp);
+
+  const serverResponse: Response<T> = await res.json();
+
   if (res.ok) {
-    if (server_response.status == 1) {
-      return server_response?.data as T;
-    } else {
-      throw new Error(server_response?.message || "Unknown error occurred");
+    if (serverResponse.status === 1) {
+      return serverResponse.data as T;
     }
-  } else {
-    throw new Error(server_response.message || "something went wrong");
+
+    throw new Error(serverResponse.message || "Unknown error occurred");
   }
+
+  throw new Error(serverResponse.message || "Something went wrong");
 };
 
 export default {
@@ -70,25 +91,29 @@ export default {
     endpoint: APIRoute,
     options: FetchRecord = {},
     isForm = false
-  ) => await fetcher<T>("POST", endpoint, options, isForm),
+  ) => fetcher<T>("POST", endpoint, options, isForm),
+
   get: async <T>(
     endpoint: APIRoute,
     options: FetchRecord = {},
     isForm = false
-  ) => await fetcher<T>("GET", endpoint, options, isForm),
+  ) => fetcher<T>("GET", endpoint, options, isForm),
+
   update: async <T>(
     endpoint: APIRoute,
     options: FetchRecord = {},
     isForm = false
-  ) => await fetcher<T>("PUT", endpoint, options, isForm),
+  ) => fetcher<T>("PUT", endpoint, options, isForm),
+
   patch: async <T>(
     endpoint: APIRoute,
     options: FetchRecord = {},
     isForm = false
-  ) => await fetcher<T>("PATCH", endpoint, options, isForm),
+  ) => fetcher<T>("PATCH", endpoint, options, isForm),
+
   remove: async <T>(
     endpoint: APIRoute,
     options: FetchRecord = {},
     isForm = false
-  ) => await fetcher<T>("DELETE", endpoint, options, isForm),
+  ) => fetcher<T>("DELETE", endpoint, options, isForm),
 };
