@@ -9,7 +9,6 @@ import ProtectedRoutes from "@/protectedRoutes";
 function Routess() {
   return (
     <Routes>
-
       <Route path="/" element={<Loginpage />} />
       <Route path="/register" element={<Registerpage />} />
 
@@ -19,7 +18,6 @@ function Routess() {
           <Route path="students" element={<Students />} />
         </Route>
       </Route>
-
     </Routes>
   );
 }

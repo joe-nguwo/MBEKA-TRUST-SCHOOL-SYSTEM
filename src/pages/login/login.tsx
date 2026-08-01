@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState,useContext } from "react";
-import  { ColurContext } from "@/context/settings.ts";
-import {auth} from "@/context/auth.tsx";
+import React, { useState, useContext } from "react";
+import { ColurContext } from "@/context/settings.ts";
+import { AuthContext } from "@/context/auth";
 
-import {  Lock, CircleUser } from "lucide-react";
+import { Lock, CircleUser } from "lucide-react";
 import {
   Card,
   CardAction,
@@ -20,7 +20,8 @@ import api from "@/services/endpoint.ts";
 function Loginpage() {
   const navigate = useNavigate();
   const x = useContext(ColurContext)
-  
+  const auth = useContext(AuthContext)
+
 
 
   const [values, setValue] = useState({
@@ -40,8 +41,10 @@ function Loginpage() {
     mutationFn: (data: { name: string; password: string }) =>
       api.post("login", { data }),
     onSuccess: (data) => {
-      auth.setBool = false
+
       console.log(data);
+      auth?.setAuthState()
+
       navigate("/auth/dashboard");
     },
     onError: (error) => {
@@ -56,9 +59,9 @@ function Loginpage() {
   }
 
   return (
-   <main className="flex items-center justify-center min-h-screen" style={{background:`var(${x?.theme})`}} >
+    <main className="flex items-center justify-center min-h-screen" style={{ background: `var(${x?.theme})` }} >
       <Card className="w-full max-w-md p-4 shadow-md"  >
-           <button onClick={x?.setTheme}>ChangeTheme</button>
+        <button onClick={x?.setTheme}>ChangeTheme</button>
         <CardHeader>
           <CardTitle className="text-center">LOGIN</CardTitle>
           <CardDescription className="text-center"></CardDescription>

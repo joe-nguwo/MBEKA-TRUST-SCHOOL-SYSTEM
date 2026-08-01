@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import api from "../../services/endpoint.ts";
-import {auth} from "@/context/auth.tsx";
+
 
 function Register() {
   const x = useContext(ColurContext)
@@ -37,7 +37,6 @@ function Register() {
       api.post("register", { data }),
     onSuccess: () => {
       console.log("good");
-      auth.setBool = false
       navigate("/auth/dashboard");
     },
     onError: () => {
