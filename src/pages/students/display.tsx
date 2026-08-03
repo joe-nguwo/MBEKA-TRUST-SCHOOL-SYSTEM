@@ -3,7 +3,6 @@ import {
   Table,
   TableHeader,
   TableBody,
-  //TableFooter,
   TableHead,
   TableRow,
   TableCell,
@@ -15,32 +14,45 @@ import api from "@/services/endpoint.ts";
 function ShowStudents() {
   const fetch = useQuery({
     queryKey: ["students"],
-    queryFn: () => api.get("allStudents"),
+    queryFn: async () => {  
+      const data:students[] = await api.get("allStudents")
+      console.log("res",data)
+      return data
+      
+    },
+      
   });
 
-  //let x: students[] = fetch.data;
 
-  return (
+  const data= fetch.data
+  console.log(data)
+ 
+
+ return (
     <Table>
-      {/* <TableCaption>List of students</TableCaption>
+      <TableCaption>List of students</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>name</TableHead>
-          <TableHead>age</TableHead>
+          <TableHead>gender</TableHead>
           <TableHead>email</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {x.map((x) => (
-          <TableRow key={x.id}>
-            <TableCell>{x.name}</TableCell>
-            <TableCell>{x.age}</TableCell>
-            <TableCell>{x.email}</TableCell>
+        {data?.map((value) => (
+         
+          <TableRow key={value.id}>
+            
+            <TableCell>{value.firstName}</TableCell>
+            <TableCell>{value.gender}</TableCell>
+            <TableCell>{value.email}</TableCell>
+              
           </TableRow>
+         
         ))}
-      </TableBody> */}
+      </TableBody>
     </Table>
-  );
+ );
 }
 
 export default ShowStudents;

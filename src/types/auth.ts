@@ -1,15 +1,18 @@
-export type response ={
-    status:number,
-    message:string,
-    token:string
-}
-
 export type students = {
     id:number,
-    name:string,
+    firstName:string,
+    lastName:string,
     email:string,
-    age:string
+    gender:string,
+    grade:string,
     createdA:string,
     updatedAt:string
 
 }
+export type response ={
+    status:number,
+    message:string,
+    data:students[]
+}
+
+

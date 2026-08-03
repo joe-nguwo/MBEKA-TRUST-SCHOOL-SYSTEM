@@ -12,7 +12,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 function AuthContextProvider({ children }: { children: ReactNode }) {
-  const [authState, setValue] = useState<boolean>(false)
+  const [authState, setValue] = useState<boolean>(true)
 
   function setAuthState() {
   setValue(prev => prev ? false : true);
