@@ -3,6 +3,7 @@ import Loginpage from "@/pages/login/login";
 import Registerpage from "@/pages/login/register";
 import Dashboard from "@/pages/dashboard";
 import Students from "@/pages/students";
+import BooksPage from "@/pages/books";
 import SidebarLayout from "@/layout/sidebar";
 import ProtectedRoutes from "@/protectedRoutes";
 
@@ -16,6 +17,7 @@ function Routess() {
         <Route path="/auth" element={<SidebarLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="students" element={<Students />} />
+          <Route path="books" element={<BooksPage />} />
         </Route>
       </Route>
     </Routes>
