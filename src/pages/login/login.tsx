@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useContext } from "react";
 import { ColurContext } from "@/context/settings.ts";
 import { AuthContext } from "@/context/auth";
+//import { login } from "@/types/auth";
 
 import { Lock, CircleUser } from "lucide-react";
 import {
@@ -21,8 +22,6 @@ function Loginpage() {
   const navigate = useNavigate();
   const x = useContext(ColurContext)
   const auth = useContext(AuthContext)
-
-
 
   const [values, setValue] = useState({
     name: "",
@@ -44,6 +43,7 @@ function Loginpage() {
 
       console.log(data);
       auth?.setAuthState()
+      console.log("this is boolean",auth?.setAuthState())
 
       navigate("/auth/dashboard");
     },
@@ -51,6 +51,10 @@ function Loginpage() {
       console.error("Login failed:", error);
     },
   });
+
+  post.data
+
+
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

@@ -6,7 +6,7 @@ function ProtectedRoutes(){
     const Auth = useContext(AuthContext)
 
     const user = Auth?.authState
-    return user ? <Outlet /> : <Navigate to="/" />
+    return user ? <Outlet /> : <Navigate to="/" state={{ from: location }} replace />
    
 }
 

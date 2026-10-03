@@ -5,7 +5,10 @@ import { ColurContext } from "./context/settings.ts";
 import Routess from "./routes/routes.tsx";
 
 
+
+
 function App() {
+
   const [value,setValue] = useState<ThemeColurs>("--foreground")
   function  setTheme(){
     setValue((value)=> (value == "--foreground"?"--background":"--foreground"))

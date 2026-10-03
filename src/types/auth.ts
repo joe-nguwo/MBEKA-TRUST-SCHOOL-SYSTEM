@@ -15,4 +15,11 @@ export type response ={
     data:students[]
 }
 
+export type login ={
+      status:number,
+    message:string,
+    token:string
+
+}
+
 

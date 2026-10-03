@@ -1,11 +1,10 @@
 import { type ReactNode } from "react";
 import { createContext, useState } from "react";
 
-
-
 interface AuthContextType {
   authState: boolean,
   setAuthState(): void
+  token?:string
 
 }
 

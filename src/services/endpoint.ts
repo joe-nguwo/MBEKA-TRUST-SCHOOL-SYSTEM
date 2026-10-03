@@ -1,5 +1,5 @@
 import { ROUTES, type APIRoute } from "./routes.ts";
-
+export let token:any
 type FetchRecord = {
   headers?: Record<string, string>;
   queries?: Record<string, unknown>;
@@ -75,10 +75,11 @@ const fetcher = async <T>(
   const res = await fetch(`${baseUrl}${_endpoint}`, temp);
 
   const serverResponse: Response<T> = await res.json();
+  token = serverResponse?.token
 
   if (res.ok) {
     if (serverResponse.status === 1) {
-      return serverResponse.data as T;
+      return serverResponse as T;
     }
 
     throw new Error(serverResponse.message || "Unknown error occurred");
