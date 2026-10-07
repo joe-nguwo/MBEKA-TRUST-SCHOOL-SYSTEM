@@ -9,17 +9,5 @@ export type students = {
     updatedAt:string
 
 }
-export type response ={
-    status:number,
-    message:string,
-    data:students[]
-}
-
-export type login ={
-      status:number,
-    message:string,
-    token:string
-
-}
 
 

@@ -1,12 +1,9 @@
+import StudentChart from "./StudentChart.tsx"
 
-function Index(){
-    return(
-        <>
-        <h1>this is the dashboard</h1>
-        
-
-        </>
-    )
+export default function Index(){
+  return(
+    <StudentChart></StudentChart>
+   
+  )
 }
 
-export default Index
