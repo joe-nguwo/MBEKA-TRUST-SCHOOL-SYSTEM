@@ -1,5 +1,8 @@
+
 import { ROUTES, type APIRoute } from "./routes.ts";
-export let token:any
+
+ let token: string | null = null;
+
 type FetchRecord = {
   headers?: Record<string, string>;
   queries?: Record<string, unknown>;
@@ -11,7 +14,7 @@ type Response<T> = {
   status: number;
   message: string;
   data?: T;
-  token?:string
+  token?: string;
 };
 
 const fetcher = async <T>(
@@ -20,30 +23,29 @@ const fetcher = async <T>(
   options: FetchRecord = {},
   isForm = false
 ): Promise<T> => {
-  const temp: RequestInit = {
-    method,
-    credentials: "include", 
+
+  const headers: Record<string, string> = {
+    ...options.headers,
   };
 
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const temp: RequestInit = {
+    method,
+    credentials: "include",
+    headers,
+  };
+
+
   if (options.data) {
-    if (!isForm) {
-      temp.headers = {
-        ...options.headers,
-        "Content-Type": "application/json",
-      };
-
-      temp.body = JSON.stringify(options.data);
-    } else {
-      temp.headers = {
-        ...options.headers,
-      };
-
+    if (isForm) {
       temp.body = options.data as FormData;
+    } else {
+      headers["Content-Type"] = "application/json";
+      temp.body = JSON.stringify(options.data);
     }
-  } else if (options.headers) {
-    temp.headers = {
-      ...options.headers,
-    };
   }
 
   const baseUrl =
@@ -66,16 +68,23 @@ const fetcher = async <T>(
     _endpoint += `?${queryString}`;
   }
 
+
   if (options.params) {
     Object.entries(options.params).forEach(([key, value]) => {
       _endpoint = _endpoint.replace(`:${key}`, String(value));
     });
   }
 
+
   const res = await fetch(`${baseUrl}${_endpoint}`, temp);
 
   const serverResponse: Response<T> = await res.json();
-  token = serverResponse?.token
+
+
+  if (serverResponse.token) {
+    token = serverResponse.token;
+  }
+
 
   if (res.ok) {
     if (serverResponse.status === 1) {

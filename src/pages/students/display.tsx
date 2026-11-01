@@ -8,14 +8,14 @@ import {
   TableCell,
   TableCaption,
 } from "@/components/ui/table";
-import { type response } from "@/types/auth";
+import { type students } from "@/types/auth";
 import api from "@/services/endpoint.ts";
 
 function ShowStudents() {
   const fetch = useQuery({
     queryKey: ["students"],
     queryFn: async () => {
-      const data: response = await api.get("allStudents")
+      const data: students = await api.get("allStudents")
       console.log("res", data)
       return data.data
 

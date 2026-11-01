@@ -120,7 +120,7 @@ function AddStudent() {
                 <input
                   type="radio"
                   name="gender"
-                  value="fale"
+                  value="male"
                   checked={values.gender === "male"}
                   onChange={handledata}
                 />

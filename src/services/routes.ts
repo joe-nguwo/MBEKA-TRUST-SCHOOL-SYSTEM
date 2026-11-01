@@ -3,6 +3,7 @@ export const ROUTES = {
  register: "/api/v1/admin/register",
  addStudent:"/api/v1/students/register",
  allStudents:"/api/v1/student/all",
+ numOfstdudent:"/api/v1/student/num"
 
 };
 
