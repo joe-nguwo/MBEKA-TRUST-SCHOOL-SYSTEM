@@ -8,6 +8,7 @@ import {
   TableCell,
   TableCaption,
 } from "@/components/ui/table";
+
 import { type students } from "@/types/auth";
 import api from "@/services/endpoint.ts";
 
@@ -17,7 +18,7 @@ function ShowStudents() {
     queryFn: async () => {
       const data: students = await api.get("allStudents")
       console.log("res", data)
-      return data.data
+      return data
 
     },
 
@@ -41,7 +42,7 @@ function ShowStudents() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data?.map((value) => (
+        {data?.map((value:any) => (
 
           <TableRow key={value.id}>
             <TableCell>{value.firstName}</TableCell>
@@ -49,6 +50,7 @@ function ShowStudents() {
             <TableCell>{value.gender}</TableCell>
             <TableCell>{value.email}</TableCell>
             <TableCell>{value.grade}</TableCell>
+       
 
           </TableRow>
 

@@ -88,7 +88,7 @@ const fetcher = async <T>(
 
   if (res.ok) {
     if (serverResponse.status === 1) {
-      return serverResponse as T;
+      return serverResponse.data as T;
     }
 
     throw new Error(serverResponse.message || "Unknown error occurred");
