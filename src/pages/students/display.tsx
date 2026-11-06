@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery,useMutation} from "@tanstack/react-query";
 import {
   Table,
   TableHeader,
@@ -8,6 +8,7 @@ import {
   TableCell,
   TableCaption,
 } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
 
 import { type students } from "@/types/auth";
 import api from "@/services/endpoint.ts";
@@ -21,14 +22,17 @@ function ShowStudents() {
       return data
 
     },
-
+  
   });
 
-
+  const del = useMutation({
+    mutationFn: async(params:{})=>{
+      console.log("the id is ",params)
+       await api.remove(`deleteStudent`,{params :{id:params}})
+    }
+  })
   const data = fetch.data
   console.log(data)
-
-
   return (
     <Table>
       <TableCaption>List of students</TableCaption>
@@ -39,6 +43,7 @@ function ShowStudents() {
           <TableHead>Gender</TableHead>
           <TableHead>Email</TableHead>
           <TableHead>Grade</TableHead>
+            <TableHead>Delete</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -50,10 +55,8 @@ function ShowStudents() {
             <TableCell>{value.gender}</TableCell>
             <TableCell>{value.email}</TableCell>
             <TableCell>{value.grade}</TableCell>
-       
-
+        <TableCell><Button className="bg-red-700" onClick={()=> del.mutate(value.id)}>Delete</Button></TableCell>
           </TableRow>
-
         ))}
       </TableBody>
     </Table>
