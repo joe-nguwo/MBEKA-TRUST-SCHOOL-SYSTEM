@@ -8,6 +8,15 @@ import {
   TableCell,
   TableCaption,
 } from "@/components/ui/table";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 import { type students } from "@/types/auth";
@@ -55,7 +64,27 @@ function ShowStudents() {
             <TableCell>{value.gender}</TableCell>
             <TableCell>{value.email}</TableCell>
             <TableCell>{value.grade}</TableCell>
-        <TableCell><Button className="bg-red-700" onClick={()=> del.mutate(value.id)}>Delete</Button></TableCell>
+        {/* <TableCell><Button className="bg-red-700" onClick={()=> del.mutate(value.id)}>Delete</Button></TableCell> */}
+        <TableCell>
+          <Dialog>
+            <DialogTrigger>
+              <Button className="bg-red-700">Delete</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Confirm Delete</DialogTitle>
+              </DialogHeader>
+              <DialogDescription>
+                Are you sure you want to delete this student?
+              </DialogDescription>
+              <DialogFooter>
+                <Button variant="destructive" onClick={() => del.mutate(value.id)}>
+                  Delete
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+          </TableCell>
           </TableRow>
         ))}
       </TableBody>
