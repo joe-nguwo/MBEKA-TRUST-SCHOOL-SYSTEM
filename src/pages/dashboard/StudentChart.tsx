@@ -17,7 +17,7 @@ type resCount = {
   count: number | string;
 };
 
-const COLORS = ["#0f766e", "#64748b"];
+const COLORS = ["#38bdf8", "#64748b"];
 
 export default function AnalyticsChart() {
 

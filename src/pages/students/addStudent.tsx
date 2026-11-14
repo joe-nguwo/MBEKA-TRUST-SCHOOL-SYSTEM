@@ -6,6 +6,12 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Mail,
+  User,
+  VenusAndMars,
+  GraduationCap,
+} from "lucide-react";
 import api from "../../services/endpoint.ts";
 
 function AddStudent() {
@@ -51,6 +57,8 @@ function AddStudent() {
   const inputStyle =
     "w-full rounded-md border border-gray-300 px-3 py-2 outline-none focus:ring-2 focus:ring-green-500";
 
+  const iconStyle = "h-5 w-5 shrink-0 text-gray-500";
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -70,76 +78,92 @@ function AddStudent() {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            className={inputStyle}
-            type="text"
-            name="Fname"
-            placeholder="First Name"
-            value={values.Fname}
-            onChange={handledata}
-            required
-          />
+          <div className="flex items-center gap-3">
+            <User className={iconStyle} />
+            <input
+              className={inputStyle}
+              type="text"
+              name="Fname"
+              placeholder="First Name"
+              value={values.Fname}
+              onChange={handledata}
+              required
+            />
+          </div>
 
-          <input
-            className={inputStyle}
-            type="text"
-            name="Lname"
-            placeholder="Last Name"
-            value={values.Lname}
-            onChange={handledata}
-            required
-          />
+          <div className="flex items-center gap-3">
+            <User className={iconStyle} />
+            <input
+              className={inputStyle}
+              type="text"
+              name="Lname"
+              placeholder="Last Name"
+              value={values.Lname}
+              onChange={handledata}
+              required
+            />
+          </div>
 
-          <input
-            className={inputStyle}
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            value={values.email}
-            onChange={handledata}
-            required
-          />
+          <div className="flex items-center gap-3">
+            <Mail className={iconStyle} />
+            <input
+              className={inputStyle}
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={values.email}
+              onChange={handledata}
+              required
+            />
+          </div>
 
-          <div>
-            <p className="mb-2 text-sm font-medium">Gender</p>
+          <div className="flex items-center gap-3">
+            <VenusAndMars className={iconStyle} />
 
-            <div className="flex gap-6">
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="female"
-                  checked={values.gender === "female"}
-                  onChange={handledata}
-                  required
-                />
-                Female
-              </label>
+            <div className="flex-1">
+              <p className="mb-2 text-sm font-medium">Gender</p>
 
-              <label className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="male"
-                  checked={values.gender === "male"}
-                  onChange={handledata}
-                />
-                Male
-              </label>
+              <div className="flex gap-6">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="female"
+                    checked={values.gender === "female"}
+                    onChange={handledata}
+                    required
+                  />
+                  Female
+                </label>
+
+                <label className="flex items-center gap-2">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="male"
+                    checked={values.gender === "male"}
+                    onChange={handledata}
+                  />
+                  Male
+                </label>
+              </div>
             </div>
           </div>
 
-          <input
-            className={inputStyle}
-            type="number"
-            name="grade"
-            placeholder="Grade (1 - 12)"
-            value={values.grade}
-            onChange={handledata}
-            min={1}
-            max={12}
-            required
-          />
+          <div className="flex items-center gap-3">
+            <GraduationCap className={iconStyle} />
+            <input
+              className={inputStyle}
+              type="number"
+              name="grade"
+              placeholder="Grade (1 - 12)"
+              value={values.grade}
+              onChange={handledata}
+              min={1}
+              max={12}
+              required
+            />
+          </div>
 
           <button
             type="submit"
