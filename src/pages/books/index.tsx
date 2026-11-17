@@ -1,10 +1,16 @@
-
-function BooksPage() {
+import DisplayBooks from "./display";
+import AddBook from "./addBook";
+function Books() {
   return (
-    <div>
+    <>
+       <AddBook />
       <h1>Books Page</h1>
-      {/* Add your books page content here */}
-    </div>
+      <DisplayBooks />
+    </>
+   
+     
+   
+ 
   );
 }
-export default BooksPage;
+export default Books;

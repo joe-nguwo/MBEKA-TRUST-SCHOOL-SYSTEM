@@ -59,6 +59,9 @@ function AddStudent() {
 
   const iconStyle = "h-5 w-5 shrink-0 text-gray-500";
 
+  const labelStyle =
+    "mb-2 block text-sm font-semibold tracking-wide text-gray-700";
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -78,53 +81,70 @@ function AddStudent() {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex items-center gap-3">
-            <User className={iconStyle} />
-            <input
-              className={inputStyle}
-              type="text"
-              name="Fname"
-              placeholder="First Name"
-              value={values.Fname}
-              onChange={handledata}
-              required
-            />
+
+          {/* First Name */}
+          <div>
+            <label className={labelStyle}>FIRST NAME</label>
+
+            <div className="flex items-center gap-3">
+              <User className={iconStyle} />
+              <input
+                className={inputStyle}
+                type="text"
+                name="Fname"
+                placeholder="First Name"
+                value={values.Fname}
+                onChange={handledata}
+                required
+              />
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <User className={iconStyle} />
-            <input
-              className={inputStyle}
-              type="text"
-              name="Lname"
-              placeholder="Last Name"
-              value={values.Lname}
-              onChange={handledata}
-              required
-            />
+          {/* Last Name */}
+          <div>
+            <label className={labelStyle}>LAST NAME</label>
+
+            <div className="flex items-center gap-3">
+              <User className={iconStyle} />
+              <input
+                className={inputStyle}
+                type="text"
+                name="Lname"
+                placeholder="Last Name"
+                value={values.Lname}
+                onChange={handledata}
+                required
+              />
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <Mail className={iconStyle} />
-            <input
-              className={inputStyle}
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={values.email}
-              onChange={handledata}
-              required
-            />
+          {/* Email */}
+          <div>
+            <label className={labelStyle}>EMAIL ADDRESS</label>
+
+            <div className="flex items-center gap-3">
+              <Mail className={iconStyle} />
+              <input
+                className={inputStyle}
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                value={values.email}
+                onChange={handledata}
+                required
+              />
+            </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <VenusAndMars className={iconStyle} />
+          {/* Gender */}
+          <div>
+            <label className={labelStyle}>GENDER</label>
 
-            <div className="flex-1">
-              <p className="mb-2 text-sm font-medium">Gender</p>
+            <div className="flex items-center gap-3">
+              <VenusAndMars className={iconStyle} />
 
-              <div className="flex gap-6">
-                <label className="flex items-center gap-2">
+              <div className="flex flex-1 gap-6">
+                <label className="flex items-center gap-2 text-sm text-gray-700">
                   <input
                     type="radio"
                     name="gender"
@@ -136,7 +156,7 @@ function AddStudent() {
                   Female
                 </label>
 
-                <label className="flex items-center gap-2">
+                <label className="flex items-center gap-2 text-sm text-gray-700">
                   <input
                     type="radio"
                     name="gender"
@@ -150,28 +170,35 @@ function AddStudent() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <GraduationCap className={iconStyle} />
-            <input
-              className={inputStyle}
-              type="number"
-              name="grade"
-              placeholder="Grade (1 - 12)"
-              value={values.grade}
-              onChange={handledata}
-              min={1}
-              max={12}
-              required
-            />
+          {/* Grade */}
+          <div>
+            <label className={labelStyle}>GRADE</label>
+
+            <div className="flex items-center gap-3">
+              <GraduationCap className={iconStyle} />
+              <input
+                className={inputStyle}
+                type="number"
+                name="grade"
+                placeholder="Grade (1 - 12)"
+                value={values.grade}
+                onChange={handledata}
+                min={1}
+                max={12}
+                required
+              />
+            </div>
           </div>
 
+          {/* Submit */}
           <button
             type="submit"
             disabled={post.isPending}
-            className="w-full rounded-md bg-green-600 py-2 font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
+            className="w-full rounded-md bg-green-600 py-2.5 font-medium text-white transition hover:bg-green-700 disabled:opacity-50"
           >
             {post.isPending ? "Registering..." : "Register"}
           </button>
+
         </form>
       </DialogContent>
     </Dialog>

@@ -10,4 +10,11 @@ export type students = {
 
 }
 
+export type books ={
+    id:number,
+    title:string,
+    author: string,
+    description: string,
+}
+
 
