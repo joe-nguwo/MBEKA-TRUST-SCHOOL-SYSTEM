@@ -10,7 +10,8 @@ export const ROUTES = {
  deleteStudent:"/api/v1/students/delete/:id",
  addBook:"/api/v1/books/register",
 allBooks:"/api/v1/books/all",
-deleteBook:"/api/v1/books/delete/:id"
+deleteBook:"/api/v1/books/delete/:id",
+booksCount:"/api/v1/books/count",
 
 };
 

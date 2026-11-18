@@ -49,6 +49,7 @@ function Books() {
           <TableHead>Title</TableHead>
             <TableHead>Description</TableHead>
           <TableHead>Author</TableHead>
+             <TableHead>Grade</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -58,6 +59,7 @@ function Books() {
             <TableCell>{value.title}</TableCell>
                <TableCell>{value.author}</TableCell>
             <TableCell>{value.description}</TableCell>
+            <TableCell>{value.grade}</TableCell>
           
         {/* <TableCell><Button className="bg-red-700" onClick={()=> del.mutate(value.id)}>Delete</Button></TableCell> */}
         <TableCell>

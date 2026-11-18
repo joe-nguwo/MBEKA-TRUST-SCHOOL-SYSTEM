@@ -18,6 +18,7 @@ function AddBook() {
     Title: "",
     Author: "",
     Description: "",
+    Grade: "",
   });
 
   const handledata = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,6 +126,24 @@ function AddBook() {
                 name="Description"
                 placeholder="Book Description"
                 value={values.Description}
+                onChange={handledata}
+                required
+              />
+            </div>
+          </div>
+            <div>
+            <label className={labelStyle}>GRADE</label>
+
+            <div className="flex items-center gap-3">
+              <FileText className={iconStyle} />
+              <input
+                className={inputStyle}
+                type="number"
+                min="1"
+                max="12"
+                name="Grade"
+                placeholder="Grade"
+                value={values.Grade}
                 onChange={handledata}
                 required
               />
